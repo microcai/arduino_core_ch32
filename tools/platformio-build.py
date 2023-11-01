@@ -94,7 +94,8 @@ env.Append(
     CPPDEFINES= [
         ("ARDUINO", 10808),
         ("VARIANT_H", env.StringifyMacro(variant_h)),
-        chip_series
+        chip_series,
+        "NDEBUG"  
     ],
 
     # LIBS is handled in _LIBFLAGS below
