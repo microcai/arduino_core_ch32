@@ -33,7 +33,10 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 mcu = env.BoardConfig().get("build.mcu")
-chip_series: str = board.get("build.series", "")[0:-1].upper() + "x"
+if mcu.startswith("ch32x035"):
+    chip_series: str = board.get("build.series", "").upper()
+else:
+    chip_series: str = board.get("build.series", "")[0:-1].upper() + "x"
 variant_h = board.get("build.arduino.openwch.variant_h")
 
 FRAMEWORK_DIR = platform.get_package_dir("framework-arduino-openwch-ch32")
@@ -130,12 +133,11 @@ env.Replace(
 
 libs = []
 
-if "build.variant" in board:
+variant = board.get("build.arduino.openwch.variant", board.get("build.variant", ""))
+if variant != "":
     variants_dir = join(
         "$PROJECT_DIR", board.get("build.variants_dir")) if board.get(
             "build.variants_dir", "") else join(FRAMEWORK_DIR, "variants")
-
-    variant = board.get("build.arduino.openwch.variant", board.get("build.variant"))
     env.Append(
         CPPPATH=[
             join(variants_dir, variant)
