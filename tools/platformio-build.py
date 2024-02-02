@@ -96,6 +96,7 @@ env.Append(
 
     CPPDEFINES= [
         ("ARDUINO", 10808),
+        ("ARDUINO_ARCH_CH32V"),
         ("VARIANT_H", env.StringifyMacro(variant_h)),
         chip_series,
         "NDEBUG"  
