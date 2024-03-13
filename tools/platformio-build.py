@@ -152,9 +152,7 @@ if variant != "":
     )
 
 # Startup files and debug.c require this to be built using BuildSources or with -Wl,-whole-archive
-pre_libs = "-lprintf" if not IS_MAC else ""
-env.Prepend(_LIBFLAGS="%s -Wl,--whole-archive " % pre_libs)
-env.Append(_LIBFLAGS=" -Wl,--no-whole-archive -lc")
+env.Append(_LIBFLAGS=" -Wl,--no-whole-archive -lc -lprintf")
 
 libs.append(env.BuildLibrary(
     join("$BUILD_DIR", "FrameworkArduino"),
