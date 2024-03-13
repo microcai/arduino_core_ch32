@@ -22,7 +22,11 @@
 //#define SYSCLK_FREQ_48MHZ_HSI   48000000
 //#define SYSCLK_FREQ_8MHz_HSE    8000000
 //#define SYSCLK_FREQ_24MHz_HSE   HSE_VALUE
-#define SYSCLK_FREQ_48MHz_HSE   48000000
+//#define SYSCLK_FREQ_48MHz_HSE   48000000
+
+#if !defined (SYSCLK_FREQ_48MHz_HSE) && !defined (SYSCLK_FREQ_24MHz_HSE)  && !defined (SYSCLK_FREQ_8MHz_HSE)  && !defined (SYSCLK_FREQ_48MHZ_HSI)  && !defined (SYSCLK_FREQ_24MHZ_HSI)  && !defined (SYSCLK_FREQ_8MHz_HSI)
+#define SYSCLK_FREQ_48MHZ_HSI   48000000
+#endif
 
 /* Clock Definitions */
 #ifdef SYSCLK_FREQ_8MHz_HSI
