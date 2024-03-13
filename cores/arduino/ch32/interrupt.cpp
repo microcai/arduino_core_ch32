@@ -227,8 +227,9 @@ void EXTI7_0_IRQHandler(void)
    uint32_t pin;
    for (pin = GPIO_Pin_0; pin <= GPIO_Pin_7; pin = pin << 1) 
    {
+      if(EXTI_GetITStatus(pin)!=RESET)
+        _gpio_exti_callback(pin);
       EXTI_ClearITPendingBit(pin);   //0x1 2 4 8 10 20 40 80
-      _gpio_exti_callback(pin);
    }
 }
 #ifdef __cplusplus
